@@ -4,68 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualize an array</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datasource@0.1.0"></script>
+    
 </head>
 <body>    
     <div>
       <canvas id="myChart"></canvas>
     </div>
- </body>
- <script>
-    let yearArray = []
-    let tempArray = []
-async function getYear() {
-    const response = await fetch("test.csv");
-    const data = await response.text();
-    const rows = data.split("\n").slice(1);
-    rows.forEach((elem) => {
-              const row = elem.split(",");
-              const year = row[0];
-              yearArray.push(year)
-            });
-          }
 
-async function getTemp() {
-    const response = await fetch("test.csv");
-    const data = await response.text();
-    const rows = data.split("\n").slice(1);
-    rows.forEach((elem) => {
-                const row = elem.split(",");
-                const temp = row[1];
-                tempArray.push(temp)
-            });
-            console.log(tempArray)
-            console.log(yearArray)
-            }
-
-            getYear()
-            getTemp()
+        <canvas id="myChart" width="100" height="100"></canvas>
+        <script>
+          // Load the dataset
+          d3.csv("test.csv").then(makeChart);
     
-
-async function getChart(){
-    const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: yearArray,
-        datasets: [{
-          label: 'Temperature',
-          data: tempArray,
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+          // Plot the data with Chart.js
+          function makeChart(countries) {
+            var years = countries.map(function (d) {
+              return d.year;
+            });
+            var temp = countries.map(function (d) {
+              return d.temp;
+            });
+    
+            var chart = new Chart("myChart", {
+              type: "bar",
+              data: {
+                labels: countryLabels,
+                datasets: [
+                  {
+                    data: populationData 
+                  }
+                ]
+              }
+            });
           }
-        }
-      }
-    });
-}
+        </script>
+ </body>
 
-getChart()
-
-  </script>
 
 </html>
