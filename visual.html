@@ -3,44 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualize an array</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datasource@0.1.0"></script>
-    
+    <title>Temperature Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>    
+<body>
     <div>
-      <canvas id="myChart"></canvas>
+        <canvas id="myChart"></canvas>
     </div>
-
-        <canvas id="myChart" width="100" height="100"></canvas>
-        <script>
-          // Load the dataset
-          d3.csv("test.csv").then(makeChart);
-    
-          // Plot the data with Chart.js
-          function makeChart(countries) {
-            var years = countries.map(function (d) {
-              return d.year;
-            });
-            var temp = countries.map(function (d) {
-              return d.temp;
-            });
-    
-            var chart = new Chart("myChart", {
-              type: "bar",
-              data: {
-                labels: countryLabels,
-                datasets: [
-                  {
-                    data: populationData 
-                  }
-                ]
-              }
-            });
-          }
-        </script>
- </body>
-
-
+    <script src="index.js"></script> 
+</body>
 </html>
